@@ -10,7 +10,8 @@
 import sys
 from PyQt5 import QtCore, QtGui
 from PyQt5.QtWidgets import QAction, QTextEdit, QMainWindow, QApplication, QFileDialog, QWidget, QPushButton
-from utils import sniper
+# from utils import sniper
+from utils import snipe_price
 
 
 class SniperWindow(object):
@@ -60,9 +61,6 @@ class SniperWindow(object):
         self.save.setText(_translate("MainWindow", "save"))
 
     def file_open(self):
-        if self.current_file_name:
-            file_name = self.current_file_name
-
         file_name, _ = QFileDialog.getOpenFileName(None, 'Open File', '.', 'Text files (*.txt);;All Files (*)')
         if file_name:
             with open(file_name, 'r') as file:
@@ -82,7 +80,7 @@ class SniperWindow(object):
             self.current_file_name = name
 
     def sniper_action(self):
-        sniper()
+        snipe_price()
         if self.current_file_name:
             file_name = self.current_file_name
             if file_name:
