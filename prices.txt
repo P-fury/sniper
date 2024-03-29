@@ -7,7 +7,7 @@ https://www.zalando.pl/asics-sportstyle-sneakersy-niskie-ivysmoke-grey-a0h15o080
 https://www.zalando.pl/asics-logo-beanie-czapka-performance-black-as144e01l-q11.html
 60
 https://www.zalando.pl/newline-core-czapka-black-1ne44e005-q11.html
-21
+22
 https://www.zalando.pl/asics-sportstyle-gel-nyc-unisex-sneakersy-niskie-graphite-greyblack-a0h15o074-q11.html
 800
 https://www.zalando.pl/zoe-ayla-system-green-zob34j004-s11.html
@@ -28,7 +28,7 @@ product: asics logo beanie czapka black
 60 lowest price: '55.0'
 
 product: newline core black 
-21 lowest price: '61.2'
+22 lowest price: '61.2'
 
 BUY!!!!!!!!! TARGET ACHIVED!!!! 
 product: asics sportstyle gel nyc unisex sneakersy niskie greyblack 
