@@ -12,7 +12,7 @@ def snipe_price():
             old_price = re.search(r"'(\d+.\d+)'", line)
             if old_price:
                 old_price_list.append(old_price.group(1))
-
+    print(old_price)
     # =========== REWRITING FILES NEED TO KEEP EMPTY LINE AFTER LAST TARGET PRICE ==========
     with open('prices.txt', 'w') as file:
         for line in existing_data:
@@ -33,11 +33,12 @@ def snipe_price():
             link = data[i]
             target_price = user_price[i]
             response = requests.get(link)
+
             if old_price_list:
                 lowest_price = old_price_list[i]
             else:
                 lowest_price = None
-            print(lowest_price)
+
             if response.status_code == 200:
                 soup = BeautifulSoup(response.text, 'html.parser')
                 target_element = soup.find('span', string='w tym VAT')
@@ -48,25 +49,25 @@ def snipe_price():
                         current_price = float(clean_price.group().replace(",", "."))
                         if lowest_price is None or current_price < float(lowest_price):
                             lowest_price = current_price
-                        print(lowest_price)
-            # =========== WHEN PRICE WAS FOUND CREATING A NAME OF PRODUCT ==========
-            if clean_price is not None:
-                product_name = re.search(r"\.\w+/(.+).html", link)
-                if product_name:
-                    product_name = product_name.group(1)
-                product_name = product_name.split('-')
-                name = ''
-                # ====== LAST TWO PARTS OF URL ARE NOT USEFULL ======
-                for i in range(len(product_name) - 4):
-                    name += str(product_name[i]) + ' '
-                name += str(product_name[-3])
 
-                # =========== WRITING MARK FOR DATA WHEN SNIPER HITS ==========
-                if float(target_price) >= float(current_price):
-                    file.write(
-                        f"\nBUY!!!!!!!!! TARGET ACHIVED!!!! \nproduct: {name} \n{target_price} lowest price: '{lowest_price}'\n")
-                    print(f"Added last checked price for {link}: {lowest_price}")
-                else:
-                    file.write(
-                        f"\nproduct: {name} \n{target_price} lowest price: '{lowest_price}'\n")
-                    print(f"Added last checked price for {link}: {lowest_price}")
+            # =========== WHEN PRICE WAS FOUND CREATING A NAME OF PRODUCT ==========
+                    if clean_price is not None:
+                        product_name = re.search(r"\.\w+/(.+).html", link)
+                        if product_name:
+                            product_name = product_name.group(1)
+                        product_name = product_name.split('-')
+                        name = ''
+                        # ====== LAST TWO PARTS OF URL ARE NOT USEFULL ======
+                        for i in range(len(product_name) - 4):
+                            name += str(product_name[i]) + ' '
+                        name += str(product_name[-3])
+
+                        # =========== WRITING MARK FOR DATA WHEN SNIPER HITS ==========
+                        if float(target_price) >= float(current_price):
+                            file.write(
+                                f"\nBUY!!!!!!!!! TARGET ACHIVED!!!! \nproduct: {name} \n{target_price} lowest price: '{lowest_price}'\n")
+                            print(f"Added last checked price for {link}: {lowest_price}")
+                        else:
+                            file.write(
+                                f"\nproduct: {name} \n{target_price} lowest price: '{lowest_price}'\n")
+                            print(f"Added last checked price for {link}: {lowest_price}")
